@@ -1,0 +1,13 @@
+.dot {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    height: 200px;
+    width: 200px;
+    margin:20px;
+    font-size: 50px;
+    background-color: rgb(16, 85, 155);
+    border-radius: 200px;
+    display: inline-block;
+  }
