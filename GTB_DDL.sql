@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS Employees (
   password VARCHAR(45) NOT NULL,
   firstName VARCHAR(45) NOT NULL,
   lastName VARCHAR(45) NOT NULL,
-  employeePhone INT NOT NULL,
+  employeePhone CHAR(10) NOT NULL,
   employeeEmail VARCHAR(45) NOT NULL,
   jobTitle VARCHAR(15) NOT NULL
 );
@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS Customers (
   customerId SERIAL PRIMARY KEY,
   firstName VARCHAR(45) NOT NULL,
   lastName VARCHAR(45) NOT NULL,
-  customerPhone INT NOT NULL,
+  customerPhone CHAR(10) NOT NULL,
   customerEmail VARCHAR(45)
 );
 
@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS Products (
 
 CREATE TABLE IF NOT EXISTS RestaurantInfo (
   restaurantName VARCHAR(45) UNIQUE PRIMARY KEY,
+  restaurantPhone CHAR(10) NOT NULL,
   restaurantAddress VARCHAR(200) NOT NULL,
   restaurantCity VARCHAR(45) NOT NULL,
   restaurantState VARCHAR(2) NOT NULL,
@@ -42,27 +43,28 @@ CREATE TABLE IF NOT EXISTS RestaurantInfo (
 
 CREATE TABLE IF NOT EXISTS Orders (
   orderNumber SERIAL PRIMARY KEY,
-  orderDate DATE,
+  orderDate DATE NOT NULL,
   orderTime VARCHAR(5) NOT NULL,
-  orderStatus VARCHAR(1) NOT NULL,
-  tipAmount NUMERIC(5,2),
-  tax NUMERIC(5,2) NOT NULL,
-  orderTotal NUMERIC(5,2) NOT NULL,
+  orderStatus VARCHAR(1) NOT NULL DEFAULT 'P',
+  tipAmount NUMERIC(5,2) NOT NULL DEFAULT 0.00,
+  tax NUMERIC(5,2) NOT NULL DEFAULT 0.00,
+  orderTotal NUMERIC(5,2) NOT NULL DEFAULT 0.00,
   serverId INT REFERENCES Employees(employeeId) NOT NULL,
   tableNumber INT REFERENCES Tables(tableNumber) NOT NULL,
   customerId INT REFERENCES Customers(customerId)
 );
 
 CREATE TABLE IF NOT EXISTS OrderProduct (
-  orderNumber INT PRIMARY KEY REFERENCES Orders(orderNumber),
+  orderNumber INT REFERENCES Orders(orderNumber),
   productId INT REFERENCES Products(productId),
-  productSize VARCHAR(4),
-  quantityOrdered VARCHAR(2) NOT NULL
+  quantityOrdered VARCHAR(2) NOT NULL,
+  totalPrice NUMERIC(5, 2) NOT NULL,
+  PRIMARY KEY(orderNumber, productId)
 );
 
 CREATE TABLE IF NOT EXISTS Reservations (
   reservationNumber SERIAL PRIMARY KEY,
-  reservationDate DATE,
+  reservationDate DATE NOT NULL,
   reservationTime VARCHAR(5) NOT NULL,
   partySize INT NOT NULL,
   customerId INT REFERENCES Employees(employeeId),
