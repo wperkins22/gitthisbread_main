@@ -24,7 +24,7 @@ export default class Header extends Component {
           </nav>
         </header>
         <div className="Content">
-          <Route exact path="/" component={Home}/>
+          <Route path="/Home" component={Home}/>
           <Route path="/Tables" component={TablesPage}/>
           <Route path="/Login" component={Login}/>
         </div>
