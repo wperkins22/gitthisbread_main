@@ -8,7 +8,13 @@ export default function Login(props) {
 
     function validateForm() {
         //Make this more fleshed out later, for now just minimum requirements
-        return userName.length > 0 && password.length > 0;
+        if(userName.length <= 0 || userName.length > 15 || password.length <= 4 || password.length > 30){
+            return false;
+        }
+        if(/[;:'"]/.test(userName)){
+            return false;
+        }
+        return true;
     }
 
     function handleSubmit(event) {
