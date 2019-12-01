@@ -5,8 +5,8 @@ export default function Home() {
     return (
         <div className="Home">
             <div className="maincont">
-                <h1>Home Page!</h1>
-                <p>A work in progress!</p>
+                <h1>Git My Bread!</h1>
+                <p>Restaurant Table Information Tracking</p>
             </div>
         </div>
     );
