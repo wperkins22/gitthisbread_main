@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
 import "./Login.css";
+import API from "./utils/API";
 
 export default function Login(props) {
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
-
+    const [failMesg, setMesg]     = useState("");
+    
     function validateForm() {
         //Make this more fleshed out later, for now just minimum requirements
         if(userName.length <= 0 || userName.length > 15 || password.length <= 4 || password.length > 30){
             return false;
         }
-        if(/[;:'"]/.test(userName)){
+        if(/[;:'"(){}]/.test(userName) || /[;:'"(){}]/.test(password)){
             return false;
         }
         return true;
@@ -20,6 +22,21 @@ export default function Login(props) {
     function handleSubmit(event) {
         //Tells user agent if event is not explicity handled, default action shouldn't be taken as normally.
         event.preventDefault();
+
+        const userInfo = {
+            userName: userName,
+            password: password,
+        };
+        API.post('/login', {userInfo})
+            .then(res => {
+                //console.log(res);
+                //console.log(res.data);
+                setMesg(res.data.Mesg);
+                if(res.data.Mesg == "success"){
+                    props.history.replace('/Home'); //Doesn't udpate component get request for some reason
+                    //Will look into further
+                }
+            })
     }
 
     return (
@@ -46,6 +63,7 @@ export default function Login(props) {
                     Login!
                 </Button>
             </form>
+            <p className="Mesg">{failMesg}</p>
         </div>
     );
 }

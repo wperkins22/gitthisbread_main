@@ -9,4 +9,13 @@
     .Login form {
         margin: 0 auto;
     }
+    
+    .Mesg {
+        padding: 0 70px;
+        padding-top: 30px;
+        margin: 0 auto;
+        max-width: 320px;
+        color: red;
+        font-weight: bold;
+    }
 }
