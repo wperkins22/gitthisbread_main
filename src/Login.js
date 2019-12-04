@@ -29,9 +29,15 @@ export default function Login(props) {
         API.post('/login', {userInfo})
             .then(res => {
                 setMesg(res.data.Mesg);
-                if(res.data.Mesg == "Success!"){
+<<<<<<< Updated upstream
+                if(res.data.Mesg === "Success!"){
                     props.history.replace('/Home');
                     window.location.reload();
+=======
+                if(res.data.Mesg === "Success"){
+                    props.history.replace('/Home'); //Doesn't update component get request for some reason
+                    //Will look into further
+>>>>>>> Stashed changes
                 }
             })
     }
