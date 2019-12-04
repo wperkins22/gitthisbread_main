@@ -19,8 +19,6 @@ const dbConfig = { //DB info & Login for postgres
     database: 'gitbread',
     user: 'postgres',
     password: '123'
-<<<<<<< Updated upstream
-=======
 };
 
 /*
@@ -30,13 +28,9 @@ const dbConfig = { //DB info & Login for mySQL
     database: 'gitbread',
     user: 'root',
     password: '123'
->>>>>>> Stashed changes
 };
 */
 let db = pgp(dbConfig);
-
-<<<<<<< Updated upstream
-=======
 
 //If the user has a cookie left over already, but no seesion info, clear the cookie
 /*app.use((req, res, next) => {
@@ -46,7 +40,6 @@ let db = pgp(dbConfig);
     next();
 });*/
 
->>>>>>> Stashed changes
 app.get('/', (req, res) =>{ //Test get request
     //Check if cookie has been created
     //If logged in repalce 'LOGIN' header with signout
