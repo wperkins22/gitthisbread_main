@@ -81,7 +81,7 @@ app.post('/login', (req, res) =>{
                 res.send({Mesg: "Account not found!"});
             }else{
                 console.log("Login success!");
-               res.cookie('login', '1', {maxAge: 900000}).send({Mesg: "Login success!"})
+               res.cookie('login', '1', {maxAge: 900000}).send({Mesg: "Login success!"});
             }
         })
         .catch(function(err){
