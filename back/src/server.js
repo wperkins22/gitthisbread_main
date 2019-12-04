@@ -98,3 +98,19 @@ app.get('/signout', (req, res) =>{
 app.listen(8082, () =>{ //Start server on 8081
     console.log('Listening on port 8082');
 });
+
+app.post('/register', (req, res) =>{
+    console.log('POST request for /register');
+    var userName = req.body.userInfo.userName;
+    var password = req.body.userInfo.password;
+    var email = req.body.userInfo.email;
+    var dateOfBirth = req.body.userInfo.dateOfBirth;
+    var query = "INSERT INTO employees (employeeid,password,firstname,lastname,employeephone,employeeemail,jobtitle) VALUES (1, '" + password + "','John', 'Doe', 1423515,'" + email + "', 'Owner');";
+    db.any(query)
+    .then(function(data){
+        })
+        .catch(function(err){
+            console.log(err);
+        })
+})
+
