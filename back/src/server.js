@@ -13,29 +13,14 @@ app.use(cors());
 
 const pgp = require('pg-promise')();
 
-/*const dbConfig = { //DB info & Login for postgres
+const dbConfig = { //DB info & Login for postgres
     host: 'localhost',
     port: 5432,
     database: 'gitbread',
     user: 'postgres',
     password: '123'
-};*/
-const dbConfig = { //DB info & Login for mySQL
-    host: 'localhost',
-    port: 3306,
-    database: 'gitbread',
-    user: 'root',
-    password: '123'
 };
 let db = pgp(dbConfig);
-
-//If the user has a cookie left over already, but no seesion info, clear the cookie
-/*app.use((req, res, next) => {
-    if (req.cookies.user_info && !req.session.user) {
-        res.clearCookie('user_info');        
-    }
-    next();
-});*/
 
 app.get('/', (req, res) =>{ //Test get request
     //Check if cookie has been created
@@ -70,7 +55,6 @@ app.post('/login', (req, res) =>{
         res.send({Mesg: "Bad character in password or username!"});
     
     }
-
     var quer = "SELECT count(*) FROM employees WHERE password = '" + password + "' AND employeeemail = '" + userName + "';";
     db.any(quer)
         .then(function(data){
@@ -90,10 +74,8 @@ app.post('/login', (req, res) =>{
 }) //Send password & user for authentication with DB
 //Respond with login authenticated cookie
 app.get('/signout', (req, res) =>{
-    clearCookie('login').send();
+    res.clearCookie('login').send();
 })
-//app.get('/signout')
-//
 
 app.listen(8082, () =>{ //Start server on 8081
     console.log('Listening on port 8082');

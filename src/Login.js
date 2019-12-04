@@ -9,7 +9,6 @@ export default function Login(props) {
     const [failMesg, setMesg]     = useState("");
     
     function validateForm() {
-        //Make this more fleshed out later, for now just minimum requirements
         if(userName.length <= 0 || userName.length > 15 || password.length <= 4 || password.length > 30){
             return false;
         }
@@ -29,12 +28,10 @@ export default function Login(props) {
         };
         API.post('/login', {userInfo})
             .then(res => {
-                //console.log(res);
-                //console.log(res.data);
                 setMesg(res.data.Mesg);
-                if(res.data.Mesg == "success"){
-                    props.history.replace('/Home'); //Doesn't udpate component get request for some reason
-                    //Will look into further
+                if(res.data.Mesg == "Success!"){
+                    props.history.replace('/Home');
+                    window.location.reload();
                 }
             })
     }
