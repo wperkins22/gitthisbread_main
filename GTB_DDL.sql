@@ -3,6 +3,7 @@ CREATE TABLE IF NOT EXISTS Employees (
   password VARCHAR(45) NOT NULL,
   firstName VARCHAR(45) NOT NULL,
   lastName VARCHAR(45) NOT NULL,
+  birthDate DATE NOT NULL,
   employeePhone CHAR(10) NOT NULL,
   employeeEmail VARCHAR(45) NOT NULL,
   jobTitle VARCHAR(15) NOT NULL
