@@ -12,6 +12,7 @@ import TablesPage from "../Containers/Tables";
 import Login from "../Login";
 import API from "../utils/API";
 import Signout from "../Components/Signout";
+import Register from "../Register";
 
 
 export default class Header extends Component {
@@ -48,6 +49,7 @@ export default class Header extends Component {
           <Route path="/Tables" component={TablesPage}/>
           <Route path="/Login" component={Login}/>
           <Route path="/Signout" component={Signout}/>
+          <Route path="/Register" component={Register}/>
         </div>
       </HashRouter>
     );
