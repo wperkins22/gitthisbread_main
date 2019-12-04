@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 //import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
-import "./register.css";
+import "./Register.css";
 import API from "./utils/API";
 
 export default function Register(props){
