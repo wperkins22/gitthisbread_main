@@ -32,7 +32,7 @@ export default function Login(props) {
                 if(res.data.Mesg === "Login success!"){
                     props.history.replace('/Home');
                     window.location.reload();
-		}	
+				}	
             })
     }
 

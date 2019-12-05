@@ -50,13 +50,15 @@ app.get('/', (req, res) =>{ //Test get request
         res.send({
             head1: 'Home',
             head2: 'Tables',
-            head3: 'Signout'
+            head3: 'Signout',
+            head4: 'Register'
         });
     }else{
         res.send({
             head1: 'Home',
             head2: 'Tables',
-            head3: 'Login'
+            head3: 'Login',
+            head4: 'Register'
         });
     }
 });
@@ -95,10 +97,7 @@ app.get('/signout', (req, res) =>{
     res.clearCookie('login').send();
 })
 
-app.listen(8082, () =>{ //Start server on 8081
-    console.log('Listening on port 8082');
-});
-
+//Registration
 app.post('/register', (req, res) =>{
     console.log('POST request for /register');
     var userName = req.body.userInfo.userName;
@@ -108,9 +107,29 @@ app.post('/register', (req, res) =>{
     var query = "INSERT INTO employees (employeeid,password,firstname,lastname,employeephone,employeeemail,jobtitle) VALUES (1, '" + password + "','John', 'Doe', 1423515,'" + email + "', 'Owner');";
     db.any(query)
     .then(function(data){
+			console.log(data);
         })
         .catch(function(err){
             console.log(err);
         })
 })
+
+app.get('/Tables', (req, res) =>{
+	console.log('GET request for /tables');
+	var query = "SELECT * FROM Tables;";
+	db.any(query)
+	.then(function(data){
+		console.log(data);
+		return res.json(data);
+	})
+	.catch(function(err){
+		console.log(err);
+	})
+})
+
+app.listen(8082, () =>{ //Start server on 8081
+    console.log('Listening on port 8082');
+});
+
+
 

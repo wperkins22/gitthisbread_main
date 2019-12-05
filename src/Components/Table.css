@@ -1,5 +1,5 @@
 .dot {
-    display: flex;
+    display: inline-grid;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-evenly;
