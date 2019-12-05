@@ -25,8 +25,7 @@
 	font-weight: 400;
 	font-size:28px;
     }
-    input[type="text"],
-    input[type="password"]
+    input#A
     {
 	margin-left: 90px;
 	display: block;
@@ -44,7 +43,7 @@
 	transition: 0.2s ea
 	
     }
-    input[type="submit"]
+    input#B
     {
 	margin-bottom: 28px;
 	width: 120px;
