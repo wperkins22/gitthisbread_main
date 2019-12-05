@@ -97,22 +97,94 @@ app.get('/signout', (req, res) =>{
     res.clearCookie('login').send();
 })
 
+//Registration functions
+function validateNumber(number) {
+    var phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+    if (number.match(phoneno))
+    {
+	return true;
+    }
+    return false;
+}
+function validateEmail(email) {
+	var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	return re.test(email);
+}
 //Registration
-app.post('/register', (req, res) =>{
-    console.log('POST request for /register');
-    var userName = req.body.userInfo.userName;
-    var password = req.body.userInfo.password;
-    var email = req.body.userInfo.email;
-    var dateOfBirth = req.body.userInfo.dateOfBirth;
-    var query = "INSERT INTO employees (employeeid,password,firstname,lastname,employeephone,employeeemail,jobtitle) VALUES (1, '" + password + "','John', 'Doe', 1423515,'" + email + "', 'Owner');";
-    db.any(query)
-    .then(function(data){
-			console.log(data);
-        })
-        .catch(function(err){
-            console.log(err);
-        })
-})
+app.post("/Register", (req, res) => {
+  console.log("POST request for /Register");
+  var password = req.body.userInfo.password;
+  var confirmPassword = req.body.userInfo.confirmPassword;
+  var email = req.body.userInfo.email;
+  var dateOfBirth = req.body.userInfo.dateOfBirth;
+  var FN = req.body.userInfo.firstName;
+  var LN = req.body.userInfo.lastName;
+  var PN = req.body.userInfo.phoneNumber;
+  var query2 = "SELECT MAX(employeeid) FROM employees;";
+  var query3 =
+    "SELECT COUNT(*) FROM employees WHERE employeeemail = '" + email + "';";
+  db.any(query3)
+    .then(function(data) {
+      if (data[0].count != 0) {
+      console.log("error - more than 1 account already created");
+      res.send({ Msg: "An account has already been created under this email!" });
+      }
+	else if (validateNumber(PN) === false)
+	{
+	   res.send({ Msg: "Invalid phone number!" });
+	}
+	else if(/[;:'"(){}]/.test(password)){
+           res.send({ Msg: "Invalid character in password!" });
+        }
+	else if (!validateEmail(email)){
+	   res.send({ Msg: "Invalid email!" });
+	}
+	/*else if (Object.prototype.toString.call(new Date(dateOfBirth)) !== "[object Date]")
+	{
+	   res.send({ Msg: "Invalid date!" });
+	}*/ //not working right now for some reason
+	else if (password != confirmPassword)
+	{
+	   res.send({ Msg: "Passwords do not match!" });
+	}
+	else if (password.length <= 4)
+	{
+	   res.send({ Msg: "Password too short!" });
+	}
+	else {
+        var employeenum = 1;
+        db.any(query2).then(function(data) {
+          employeenum = data[0].max + 1;
+          var query =
+            "INSERT INTO employees (employeeid,password,firstname,lastname,employeephone,employeeemail,jobtitle, birthDate) VALUES ('" +
+            employeenum +
+            "', '" +
+            password +
+            "','" +
+            FN +
+            "', '" +
+            LN +
+            "', '" +
+            PN +
+            "','" +
+            email +
+            "', 'Employee','" +
+            dateOfBirth +
+            "');";
+          db.any(query)
+            .then(function(data) {
+		res.send({ Msg: "Success" });
+	    })
+            .catch(function(err) {
+              console.log(err);
+            });
+        });
+      }
+    })
+    .catch(function(err) {
+      console.log(err);
+    });
+});
 
 app.get('/Tables', (req, res) =>{
 	console.log('GET request for /tables');
