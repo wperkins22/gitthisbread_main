@@ -22,11 +22,11 @@ export default function Login(props) {
         //Tells user agent if event is not explicity handled, default action shouldn't be taken as normally.
         event.preventDefault();
 
-        const userInfo = {
+        const loginInfo = {
             userName: userName,
             password: password,
         };
-        API.post('/login', {userInfo})
+        API.post('/login', {loginInfo})
             .then(res => {
                 setMesg(res.data.Mesg);
                 if(res.data.Mesg === "Login success!"){
