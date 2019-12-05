@@ -53,12 +53,12 @@ export default function Register(props){
 	    <form onSubmit={handleSubmit}> 
                     <div id="login-box">
 			<h1> Sign up </h1>
-			    <input type="text" onChange={e => setUserName(e.target.value)} name="username" placeholder="Username"/>
-			    <input type="text" onChange={e => setEmail(e.target.value)} name="email" placeholder="Email"/>
-			    <input type="text" onChange={e => setDOB(e.target.value)} name="DOB" placeholder="Date of Birth"/>
-			    <input type="password" onChange={e => setPassword(e.target.value)} name="password" placeholder="Password"/>
-			    <input type="password" onChange={e => setConfirmPassword(e.target.value)} name="password2" placeholder="Confirm Password"/>
-			    <input type="submit" disabled={!validateForm()} name="signup" value="Sign Up"/>
+			    <input type="text" onChange={e => setUserName(e.target.value)} name="username" placeholder="Username" id="A"/>
+			    <input type="text" onChange={e => setEmail(e.target.value)} name="email" placeholder="Email" id="A"/>
+			    <input type="text" onChange={e => setDOB(e.target.value)} name="DOB" placeholder="Date of Birth" id="A"/>
+			    <input type="password" onChange={e => setPassword(e.target.value)} name="password" placeholder="Password" id="A"/>
+			    <input type="password" onChange={e => setConfirmPassword(e.target.value)} name="password2" placeholder="Confirm Password" id="A"/>
+			    <input type="submit" disabled={!validateForm()} name="signup" value="Sign Up" id="B"/>
 		    </div>
 	  </form>
         </div>
