@@ -156,7 +156,7 @@ app.post("/Register", (req, res) => {
         db.any(query2).then(function(data) {
           employeenum = data[0].max + 1;
           var query =
-            "INSERT INTO employees (employeeid,password,firstname,lastname,employeephone,employeeemail,jobtitle, birthDate) VALUES ('" +
+            "INSERT INTO employees (employeeid,password,firstname,lastname, birthDate, employeephone,employeeemail,jobtitle) VALUES ('" +
             employeenum +
             "', '" +
             password +
@@ -165,9 +165,9 @@ app.post("/Register", (req, res) => {
             "', '" +
             LN +
             "', '" +
+	    email +
+	    "','" +
             PN +
-            "','" +
-            email +
             "', 'Employee','" +
             dateOfBirth +
             "');";
