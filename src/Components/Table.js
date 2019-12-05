@@ -8,21 +8,50 @@ var table_size = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var i = 0;
 var tablenumber = 0;
 
+var table_status_user = "";
+var table_location_user = "";
+var table_size_user = "";
+
+function userInput() {
+	table_status_user = document.getElementById("t-stat").value;
+	table_location_user = document.getElementById("t-loc").value;
+	table_size_user = document.getElementById("t-size").value;
+	console.log(table_status_user);
+	console.log(table_location_user);
+	console.log(table_size_user);
+	const input = {
+		num: (tablenumber - 1),
+		stat: table_status_user,
+		loc: table_location_user,
+		size: table_size_user
+		};
+	API.post('/Tables', {input});
+	table_status[tablenumber - 1] = table_status_user;
+	table_location[tablenumber - 1] = table_location_user;
+	table_size[tablenumber - 1] = table_size_user;
+	window.location.reload(false);
+}
+
 class Popup extends React.Component {
-  render() {
-    return (
-      <div className='popup'>
-        <div className='popup_inner'>
-          <h1>{this.props.text}</h1>
-          <h1>Table Status: {table_status[tablenumber]}</h1>
-          <h1>Table Number: {tablenumber}</h1>
-          <h1>Table Location: {table_location[tablenumber]}</h1>
-          <h1>Table Size: {table_size[tablenumber]}</h1>
-        <button onClick={this.props.closePopup}>Save!</button>
-        </div>
-      </div>
-    );
-  }
+	render() {
+		return (
+		<div className='popup'>
+			<div className='popup_inner'>
+				<h1>{this.props.text}</h1>
+				<h1>Table Status: {table_status[tablenumber - 1]}</h1>
+				<input type="text" id="t-stat" placeholder={table_status[tablenumber - 1]}></input>
+				<h1>Table Number: {tablenumber}</h1>
+				<h1>Table Location:</h1>
+				<input type="text" id="t-loc" placeholder={table_location[tablenumber - 1]}></input>
+				<h1>Table Size:</h1>
+				<input type="text" id="t-size" placeholder={table_size[tablenumber - 1]}></input>
+				<br />
+				<button onClick={this.props.closePopup}>Close!</button>
+				<button onClick={userInput}>Save!</button>
+			</div>
+		</div>
+		);
+	}
 }
 
 export default class Table extends Component {
@@ -62,7 +91,8 @@ export default class Table extends Component {
     btnTapped(id) {
 		this.togglePopup();
 		tablenumber = parseInt(id);
-		console.log(tablenumber);
+		console.log(tablenumber - 1);
+		console.log(table_status);
     }
     
     async componentDidMount() {
@@ -71,7 +101,7 @@ export default class Table extends Component {
 		console.log(response.data.length);
 		
 		for (i; i < response.data.length; i += 1) {
-			console.log('hello');
+			console.log(i);
 			table_status[i] = response.data[i].tablestatus;
 			table_location[i] = response.data[i].tablelocation;
 			table_size[i] = response.data[i].tablesize;

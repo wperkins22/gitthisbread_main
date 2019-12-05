@@ -173,14 +173,31 @@ app.post("/Register", (req, res) => {
 });
 
 app.get('/Tables', (req, res) =>{
-	console.log('GET request for /tables');
-	var query = "SELECT * FROM Tables;";
+	console.log('GET request for /Tables');
+	var query = "SELECT * FROM Tables ORDER BY tablenumber ASC;";
 	db.any(query)
 	.then(function(data){
 		console.log(data);
 		return res.json(data);
 	})
 	.catch(function(err){
+		console.log(err);
+	})
+})
+
+app.post('/Tables', (req, res) =>{
+	var tableNum = req.body.input.num;
+	var tableStat = req.body.input.stat;
+	var tableLoc = req.body.input.loc;
+	var tableSize = req.body.input.size;
+	console.log('POST request for /Tables');
+	var query = "INSERT INTO tables VALUES (" + tableNum + ", '" + tableStat + "', " + tableLoc + ", " + tableSize + ") ON CONFLICT (tablenumber) DO UPDATE SET tablestatus = EXCLUDED.tablestatus, tablelocation = EXCLUDED.tablelocation, tablesize = EXCLUDED.tablesize;";
+	console.log(query);
+	db.any(query)
+	.then(function(data) {
+		res.send({ Msg: "Success" });
+	})
+	.catch(function(err) {
 		console.log(err);
 	})
 })

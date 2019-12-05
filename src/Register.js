@@ -19,7 +19,7 @@ export default function Register(props){
         event.preventDefault();
 
         const userInfo = {
-            password: password,
+        password: password,
 	    email: email,
 	    confirmPassword: confirmPassword,
 	    dateOfBirth: dateOfBirth,
