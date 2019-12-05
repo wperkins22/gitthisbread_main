@@ -41,6 +41,7 @@ export default class Header extends Component {
           <nav className="navbar">
             <NavLink to="/Home">{this.state.headers.head1}</NavLink>
             <NavLink to="/Tables">{this.state.headers.head2}</NavLink>
+	    <NavLink to="/Register">Register</NavLink>
             <NavLink to={fRoute}>{this.state.headers.head3}</NavLink>
           </nav>
         </header>
