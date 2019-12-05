@@ -31,7 +31,23 @@ export default function Register(props){
             .then(res => {
                 setMsg(res.data.Msg);
                 if(res.data.Msg === "Success"){
-                    props.history.replace('/Home'); 
+
+                    const loginInfo = {
+                        userName: email,
+                        password: password,
+                    };
+
+                    API.post('/login', {loginInfo})
+                        .then(res => {
+                            console.log(res);
+                            if(res.data.Mesg === "Login success!"){
+                                props.history.replace('/Home');
+                                window.location.reload();
+                            }
+                            else{
+                                props.history.replace('/Home'); 
+                            }	
+                        })
                 }
             })
     }
