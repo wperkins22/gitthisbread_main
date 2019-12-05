@@ -9,15 +9,15 @@ export default class Table extends Component {
             .bind(this);
     }
     btnTapped() {
-        alert('yo yo yo');
+        alert('table information goes here');
     }
   render() {
     return (
     <div>
-        <span class="dot" onClick={this.btnTapped}></span>
-        <span class="dot" onClick={this.btnTapped}></span>
-        <span class="dot" onClick={this.btnTapped}></span>
-        <span class="dot" onClick={this.btnTapped}></span>
+        <span className="dot" onClick={this.btnTapped}></span>
+        <span className="dot" onClick={this.btnTapped}></span>
+        <span className="dot" onClick={this.btnTapped}></span>
+        <span className="dot" onClick={this.btnTapped}></span>
     </div>
     )
     }
