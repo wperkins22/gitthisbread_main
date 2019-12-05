@@ -62,16 +62,14 @@ app.get('/', (req, res) =>{ //Test get request
         });
     }
 });
-//app.get('/login') //GET basic info for login page: nothing maybe?
+
 app.post('/login', (req, res) =>{
     console.log('POST request for /login');
-    //console.log(req);
-    var userName = req.body.userInfo.userName;
-    var password = req.body.userInfo.password;
+    var userName = req.body.loginInfo.userName;
+    var password = req.body.loginInfo.password;
 
     if(password.match(/[;'"{}()]/) || userName.match(/[;'"{}()]/)){
         console.log("Login info contained bad characters, stopped.");
-        res.cookie('login', '0', {maxAge: 900000});
         res.send({Mesg: "Bad character in password or username!"});
     
     }
@@ -91,8 +89,7 @@ app.post('/login', (req, res) =>{
             res.send({Mesg: "Database connection error, try again!"});
         })
 
-}) //Send password & user for authentication with DB
-//Respond with login authenticated cookie
+})
 app.get('/signout', (req, res) =>{
     res.clearCookie('login').send();
 })
