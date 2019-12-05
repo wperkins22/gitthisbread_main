@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
+//import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
 import "./Register.css";
 import API from "./utils/API";
 
@@ -12,14 +12,6 @@ export default function Register(props){
     const [lastName, setLN] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [failMsg, setMsg]     = useState("");
-    function validateNumber(number) {
-        var phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
-        if (number.match(phoneno))
-	{
-	    return true;
-	}
-	return false;
-    }
 	
 
     function handleSubmit(event) {
