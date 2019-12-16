@@ -1,3 +1,21 @@
+### Description:
+
+This app allows users to track table information in a restaurant. Features include login and table information. 
+Built using React.js
+
+### Deployment: 
+
+-Navigate to your gitthisbread_main folder
+-type ‘npm install’
+-type ’npm start’
+-Your development server should be started now on http://localhost:3000
+
+### Authors: GitThisBread Team @ University of Colorado CS Dept.
+
+### Date
+
+Fall '19
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
