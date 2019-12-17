@@ -5,10 +5,18 @@ Built using React.js
 
 ### Deployment: 
 
+Deployment: 
+-Ensure a postgres database named ‘gitbread’ exists with the tables from GTB_DDL.sql. Also ensure the password in server.js is set correctly.
 -Navigate to your gitthisbread_main folder
+-Start the backend by navigating to the ‘back’ folder.
+-type ‘npm install’
+-type ‘node src/server.js’
+-To start the React frontend, navigate back to the main folder
 -type ‘npm install’
 -type ’npm start’
--Your development server should be started now on http://localhost:3000
+-The Node server and React development server should now be started and accessible at http://localhost:3000
+-Use a Chrome browser with the flag --disable-web-security to ensure the development servers work correctly.
+
 
 ### Authors: GitThisBread Team @ University of Colorado CS Dept.
 
